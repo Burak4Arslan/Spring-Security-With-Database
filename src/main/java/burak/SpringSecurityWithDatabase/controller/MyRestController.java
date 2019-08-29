@@ -2,8 +2,9 @@ package burak.SpringSecurityWithDatabase.controller;
 
 import burak.SpringSecurityWithDatabase.entity.Users;
 import burak.SpringSecurityWithDatabase.service.UserService;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -20,6 +21,11 @@ public class MyRestController {
     @GetMapping("/users")
     public List<Users> getUsers() {
         return userService.findAll();
+    }
+
+    @PostMapping("/users")
+    public Users saveUser(@RequestBody Users user) {
+        return userService.save(user);
     }
 
 }

@@ -8,11 +8,11 @@ import java.util.Set;
 public class Users {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "user_id")
     private Long id;
 
-    @Column(name = "username")
+    @Column(name = "username" ,unique = true)
     private String username;
     @Column(name = "password")
     private String password;
@@ -26,6 +26,11 @@ public class Users {
         this.username = user.getUsername();
         this.password = user.getPassword();
         this.roleSet = user.getRoleSet();
+    }
+
+    public Users(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
 
     public Users() {
