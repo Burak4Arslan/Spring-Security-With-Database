@@ -1,21 +1,22 @@
 package burak.SpringSecurityWithDatabase.controller;
 
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@Controller
 public class MyController {
 
     @GetMapping("/")
     public String home() {
-        return "Merhaba";
+        return "home";
     }
 
     @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping("/secured")
     public String secured() {
-        return "Helloo";
+        return "secret";
     }
+
 
 }

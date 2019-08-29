@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.access.AccessDeniedHandler;
 
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableJpaRepositories(basePackageClasses = UserRepository.class)
@@ -23,6 +24,9 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter{
     @Autowired
     private UserDetailsService userDetailsService;
 
+    @Autowired
+    private AccessDeniedHandler accessDeniedHandler;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
@@ -31,7 +35,12 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter{
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()
-                .permitAll();
+                .permitAll()
+                .and()
+                .logout()
+                .permitAll()
+                .and()
+                .exceptionHandling().accessDeniedHandler(accessDeniedHandler);
 
     }
 
@@ -52,7 +61,13 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter{
 
             @Override
             public boolean matches(CharSequence charSequence, String s) {
-                return true;
+
+                if(charSequence.toString().equals(s)){
+                    return true;
+                } else {
+                    return false;
+                }
+
             }
         };
     }
