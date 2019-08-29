@@ -12,7 +12,20 @@
 
 <a href="/secured">See the Secret</a>
 
+<!--<form>-->
+<!--    <input type="text" placeholder="Username">-->
+<!--    <input type="password" placeholder="Password">-->
+<!--    <input type="submit">-->
+<!--</form>-->
+
+<div th:if="${param.logout}">
+    <div class="alert alert-info">
+        You have been logged out.
+    </div>
+</div>
+
 <div th:replace="fragments/footer :: footer"/>
+
 
 </body>
 

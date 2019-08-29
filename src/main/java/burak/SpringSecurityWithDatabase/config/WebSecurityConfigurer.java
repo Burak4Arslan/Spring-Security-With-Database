@@ -39,6 +39,7 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter{
                 .and()
                 .logout()
                 .permitAll()
+                .logoutSuccessUrl("/?logout")
                 .and()
                 .exceptionHandling().accessDeniedHandler(accessDeniedHandler);
 
