@@ -7,11 +7,15 @@
     <meta charset="UTF-8">
     <title>Access Denied</title>
 
+    <div th:replace="fragments/myCSS :: defaultCSS"></div>
+
 </head>
 
 <body>
 
     <p>You are Not Authorized to see this page</p>
+
+    <p><a href="/">Turn Back to HomePage</a></p>
 
     <div th:replace="fragments/footer :: footer"/>
 

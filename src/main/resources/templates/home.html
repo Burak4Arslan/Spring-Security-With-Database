@@ -19,11 +19,13 @@
 
     <a href="/secured">See All Users</a>
 
-    <p th:unless="${#httpServletRequest.remoteUser}">
-        <p><input type="text" placeholder="Username" id="username"></p>
-        <p><input type="password" placeholder="Password" id="password"></p>
-        <p><button id="signButton">Sign in</button></p>
-    </p>
+    <p>
+        <div th:unless="${#httpServletRequest.remoteUser}">
+            <p><input type="text" placeholder="Username" id="username"></p>
+            <p><input type="password" placeholder="Password" id="password"></p>
+            <p><button id="signButton">Sign in</button></p>
+        </div>
+</p>
 
     <div th:if="${param.logout}">
         <div class="alert alert-info">
