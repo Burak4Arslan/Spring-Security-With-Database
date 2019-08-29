@@ -19,6 +19,15 @@ public class Users {
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roleSet;
 
+    public Users(Users user) {
+        this.id = user.getId();
+        this.username = user.getUsername();
+        this.password = user.getPassword();
+        this.roleSet = user.getRoleSet();
+    }
+
+    public Users() {
+    }
 
     public Long getId() {
         return id;

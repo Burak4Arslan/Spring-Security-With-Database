@@ -6,6 +6,11 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 
 public class MyUserDetails extends Users implements UserDetails {
+
+    public MyUserDetails(final Users user) {
+        super(user);
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;

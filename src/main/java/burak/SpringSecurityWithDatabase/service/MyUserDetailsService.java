@@ -1,12 +1,28 @@
 package burak.SpringSecurityWithDatabase.service;
 
+import burak.SpringSecurityWithDatabase.entity.MyUserDetails;
+import burak.SpringSecurityWithDatabase.entity.Users;
+import burak.SpringSecurityWithDatabase.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
+@Service
 public class MyUserDetailsService implements UserDetailsService {
+
+    @Autowired
+    private UserRepository userRepository;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return null;
+        Optional<Users> optionalUsers = userRepository.findByUsername(username);
+
+        optionalUsers.orElseThrow(()-> new UsernameNotFoundException("Username not Found"));
+        return optionalUsers.map(MyUserDetails::new).get();
+
     }
 }
