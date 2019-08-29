@@ -4,27 +4,36 @@
 <head>
 
     <meta charset="UTF-8">
+
     <title>Home</title>
+
+    <div th:replace="fragments/myCSS :: defaultCSS"></div>
 
 </head>
 
 <body>
 
-<a href="/secured">See All Users</a>
+<div class="wrapper">
 
-<p>
-    <input type="text" placeholder="Username" id="username">
-    <input type="password" placeholder="Password" id="password">
-    <button id="signButton">Sign in</button>
-</p>
+    <h1 id="homepageHeader">HOMEPAGE</h1>
 
-<div th:if="${param.logout}">
-    <div class="alert alert-info">
-        You have been logged out.
+    <a href="/secured">See All Users</a>
+
+    <p th:unless="${#httpServletRequest.remoteUser}">
+        <p><input type="text" placeholder="Username" id="username"></p>
+        <p><input type="password" placeholder="Password" id="password"></p>
+        <p><button id="signButton">Sign in</button></p>
+    </p>
+
+    <div th:if="${param.logout}">
+        <div class="alert alert-info">
+            You have been logged out.
+        </div>
     </div>
-</div>
 
-<div th:replace="fragments/footer :: footer"/>
+    <div th:replace="fragments/footer :: footer"/>
+
+</div>
 
 <script>
 

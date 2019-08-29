@@ -14,15 +14,15 @@
 
         <footer>
             <!-- this is footer -->
-            <div class="mt-5 d-lg-block" th:if="${#httpServletRequest.remoteUser}">
-                Logged In as <span th:text="${#httpServletRequest.remoteUser}"></span>
+            <div th:if="${#httpServletRequest.remoteUser}">
+                Logged In as <span id="usernameSpan" th:text="${#httpServletRequest.remoteUser}"></span>
                 <form th:action="@{/logout}" method="post">
-                    <input class="btn btn-dark" type="submit" value="Sign Out"/>
+                    <input type="submit" value="Sign Out"/>
                 </form>
             </div>
 
-            <div class="mt-5 d-lg-block" th:unless="${#httpServletRequest.remoteUser}">
-                Currently Not Logged In <a class="btn btn-dark" href="/login">Log in</a>
+            <div th:unless="${#httpServletRequest.remoteUser}">
+                Currently Not Logged In <a href="/login">Log in</a>
             </div>
 
         </footer>
