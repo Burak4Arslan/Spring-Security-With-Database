@@ -1,9 +1,13 @@
 package burak.SpringSecurityWithDatabase.entity;
 
+import org.springframework.security.config.core.GrantedAuthorityDefaults;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class MyUserDetails extends Users implements UserDetails {
 
@@ -13,7 +17,13 @@ public class MyUserDetails extends Users implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+
+        List<SimpleGrantedAuthority> collect =
+                getRoleSet()
+                .stream()
+                .map(role -> new SimpleGrantedAuthority("ROLE_" + role.getRole())).collect(Collectors.toList());
+
+        return collect;
     }
 
     @Override
