@@ -9,6 +9,7 @@
 
     <div th:replace="fragments/myCSS :: defaultCSS"></div>
 
+
 </head>
 
 <body>
@@ -16,7 +17,6 @@
 <div class="wrapper">
 
     <h1 id="homepageHeader">HOMEPAGE</h1>
-
     <div th:if="${#httpServletRequest.remoteUser}">
         <p><a href="/profile">My Profile</a></p>
 
@@ -26,12 +26,12 @@
         <div th:unless="${#httpServletRequest.remoteUser}">
             <div id="signinMainDiv">
                 <p id="signinP">Sign in Form</p>
-                <div id="signinSuccessDiv">Signed in Successfully</div>
-                <div id="signinFailDiv">Signed in Failed! Please Try Again</div>
-                <div id="emptyValues">Username or Password Cannot Be Empty</div>
+                <div id="signinSuccessDiv" class="alert alert-success">Signed in Successfully</div>
+                <div id="signinFailDiv" class="alert alert-danger">Signed in Failed! Please Try Again</div>
+                <div id="emptyValues" class="alert alert-light">Username or Password Cannot Be Empty</div>
                 <p><input type="text" placeholder="Username" id="username"></p>
                 <p><input type="password" placeholder="Password" id="password"></p>
-                <p><button id="signButton">Sign in</button></p>
+                <p><button id="signButton" class="btn btn-success">Sign in</button></p>
             </div>
         </div>
     </p>

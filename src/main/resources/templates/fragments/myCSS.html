@@ -28,27 +28,14 @@
             }
 
             #signinSuccessDiv {
-
-                padding: 10px;
-                background-color: lightgreen;
-                width: 200px;
-                text-align: center;
                 display: none;
             }
 
             #signinFailDiv {
-                padding: 10px;
-                background-color: indianred;
-                width: 200px;
-                text-align: center;
                 display: none;
             }
 
             #emptyValues {
-                padding: 10px;
-                background-color: palegoldenrod;
-                width: 200px;
-                text-align: center;
                 display: none;
             }
 
@@ -72,7 +59,28 @@
                 text-align: initial;
             }
 
+            #accessDeniedP {
+                padding: 10px;
+                background-color: darksalmon;
+                border: darksalmon 1px solid;
+            }
+
+            #username {
+                margin-top: 20px;
+            }
+
         </style>
+
+
+        <link rel="stylesheet"
+              href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+              crossorigin="anonymous" th:src="@{/webjars/bootstrap/4.0.0/css/bootstrap.min.js}">
+
+        <script src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.js"
+                crossorigin="anonymous" th:src="@{/webjars/bootstrap/4.0.0/js/bootstrap.min.js}"></script>
+
     </div>
 
 </head>
