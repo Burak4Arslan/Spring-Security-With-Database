@@ -1,6 +1,7 @@
 package burak.SpringSecurityWithDatabase.entity;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -17,8 +18,8 @@ public class Users {
     @Column(name="password")
     private String password;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "user_role", joinColumns =  @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roleSet;
 
     public Users(Users user) {
@@ -31,6 +32,7 @@ public class Users {
     public Users(String username, String password) {
         this.username = username;
         this.password = password;
+        this.setRoleSet(new HashSet<>());
     }
 
     public Users() {

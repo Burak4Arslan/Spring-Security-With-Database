@@ -1,20 +1,33 @@
 package burak.SpringSecurityWithDatabase.controller;
 
+import burak.SpringSecurityWithDatabase.entity.Role;
 import burak.SpringSecurityWithDatabase.entity.Users;
+import burak.SpringSecurityWithDatabase.service.RoleService;
 import burak.SpringSecurityWithDatabase.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.transaction.Transactional;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @Transactional
 public class UsersRestController {
 
     private final UserService userService;
+
+    private RoleService roleService;
+
+    @Autowired
+    public UsersRestController(UserService userService, RoleService roleService) {
+        this.userService = userService;
+        this.roleService = roleService;
+    }
 
     public UsersRestController(UserService userService) {
         this.userService = userService;
@@ -35,6 +48,11 @@ public class UsersRestController {
                 return null;
             }
         }
+        Role userRole = roleService.findByRole("USER");
+        Set<Role> newRoleSet = new HashSet<>();
+        newRoleSet.add(userRole);
+        user.setRoleSet(newRoleSet);
+
         return userService.save(user);
     }
 
