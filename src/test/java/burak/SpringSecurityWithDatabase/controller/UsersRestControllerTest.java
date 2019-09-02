@@ -1,7 +1,7 @@
-package burak.SpringSecurityWithDatabase.service;
+package burak.SpringSecurityWithDatabase.controller;
 
 import burak.SpringSecurityWithDatabase.entity.Users;
-import burak.SpringSecurityWithDatabase.repository.UserRepository;
+import burak.SpringSecurityWithDatabase.service.UserService;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -13,23 +13,22 @@ import java.util.List;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
-public class UserServiceImplTest {
+public class UsersRestControllerTest {
 
     @Mock
-    UserRepository userRepository;
-
     UserService userService;
 
+    UsersRestController usersRestController;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
 
-        userService = new UserServiceImpl(userRepository);
+        usersRestController = new UsersRestController(userService);
     }
 
     @Test
-    public void findAll() {
+    public void getUsers() {
 
         Users user1 = new Users();
         user1.setId(1L);
@@ -40,17 +39,18 @@ public class UserServiceImplTest {
         users.add(user1);
         users.add(user2);
 
-        when(userRepository.findAll()).thenReturn(users);
+        when(userService.findAll()).thenReturn(users);
 
-        List<Users> usersList = userService.findAll();
+        List<Users> usersList = usersRestController.getUsers();
 
-        verify(userRepository,times(1)).findAll();
+        verify(userService,times(1)).findAll();
         assertEquals(users,usersList);
+
 
     }
 
     @Test
-    public void save() {
+    public void saveUser() {
 
         Users user1 = new Users();
         user1.setId(1L);
@@ -64,13 +64,14 @@ public class UserServiceImplTest {
         Users savingUser = new Users();
         savingUser.setId(3L);
 
-        when(userRepository.save(savingUser)).thenReturn(savingUser);
+        when(userService.save(savingUser)).thenReturn(savingUser);
 
-        Users savedUser = userRepository.save(savingUser);
+        Users savedUser = usersRestController.saveUser(savingUser);
 
-        verify(userRepository,times(1)).save(savingUser);
+        verify(userService,times(1)).save(savingUser);
         assertEquals(savingUser,savedUser);
 
-    }
 
+
+    }
 }
