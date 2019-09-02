@@ -14,9 +14,14 @@ public class MyController {
 
     @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping("/secured")
-    public String secured() {
+    public String securedPage() {
         return "secret";
     }
 
+    @PreAuthorize("hasAnyRole('USER','ADMIN')")
+    @GetMapping("/profile")
+    public String profilePage() {
+        return "profile";
+    }
 
 }

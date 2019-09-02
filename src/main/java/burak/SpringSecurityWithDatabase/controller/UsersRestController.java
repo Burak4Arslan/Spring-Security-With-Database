@@ -5,10 +5,7 @@ import burak.SpringSecurityWithDatabase.entity.Users;
 import burak.SpringSecurityWithDatabase.service.RoleService;
 import burak.SpringSecurityWithDatabase.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
 import java.util.HashSet;
@@ -36,6 +33,11 @@ public class UsersRestController {
     @GetMapping("/users")
     public List<Users> getUsers() {
         return userService.findAll();
+    }
+
+    @GetMapping("/user")
+    public Users getUsers(@RequestParam String username) {
+        return userService.findByUsername(username);
     }
 
     @PostMapping("/users")

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Profile</title>
+
+    <div th:replace="fragments/myCSS :: defaultCSS"></div>
+
+</head>
+
+<body>
+
+<div class="profilePageWrapper">
+
+    <div>Username : <span id="usernameSpan" th:text="${#httpServletRequest.remoteUser}"></span></div>
+    <div>Roles : <span id="rolesSpan"></span></div>
+
+    <p><a href="/">HomePage</a></p>
+
+    <div th:replace="fragments/footer :: footer"/>
+</div>
+
+
+
+<script>
+
+    let loggedUsername = document.getElementById("usernameSpan").innerText;
+    console.log(loggedUsername);
+    getUserInfos();
+    function getUserInfos() {
+        let getUserInfosRequest = new XMLHttpRequest();
+
+        getUserInfosRequest.onreadystatechange = () => {
+            if (getUserInfosRequest.readyState == 4 && getUserInfosRequest.status == 200){
+                let response = JSON.parse(getUserInfosRequest.response)
+                document.getElementById("rolesSpan").innerText = response.roleSet[0].role;
+                // console.log( getUserInfosRequest.response)
+            }
+        }
+
+        getUserInfosRequest.open("GET","http://localhost:8080/user?username="+loggedUsername, true);
+        getUserInfosRequest.setRequestHeader("Content-Type", "application/json");
+        getUserInfosRequest.send();
+
+    }
+
+</script>
+
+</body>
+
+</html>
