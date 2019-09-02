@@ -64,12 +64,18 @@ public class UserServiceImplTest {
         Users savingUser = new Users();
         savingUser.setId(3L);
 
-        when(userRepository.save(savingUser)).thenReturn(savingUser);
+        Users savingUserFail = new Users();
+        savingUser.setId(3L);
 
-        Users savedUser = userRepository.save(savingUser);
+        when(userRepository.save(savingUser)).thenReturn(savingUser);
+        when(userRepository.save(savingUserFail)).thenReturn(null);
+
+        Users savedUser = userService.save(savingUser);
+        Users savedUserFail = userService.save(savingUserFail);
 
         verify(userRepository,times(1)).save(savingUser);
         assertEquals(savingUser,savedUser);
+        assertEquals(null,savedUserFail);
 
     }
 

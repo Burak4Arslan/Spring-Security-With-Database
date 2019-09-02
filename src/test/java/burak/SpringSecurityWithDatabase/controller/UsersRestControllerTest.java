@@ -63,14 +63,19 @@ public class UsersRestControllerTest {
 
         Users savingUser = new Users();
         savingUser.setId(3L);
+        Users savingUserFail = new Users();
+        savingUser.setId(3L);
 
         when(userService.save(savingUser)).thenReturn(savingUser);
+        when(userService.save(savingUserFail)).thenReturn(null);
 
         Users savedUser = usersRestController.saveUser(savingUser);
+        Users savedUserFail = usersRestController.saveUser(savingUserFail);
 
         verify(userService,times(1)).save(savingUser);
+        verify(userService,times(2)).findAll();
         assertEquals(savingUser,savedUser);
-
+        assertEquals(null,savedUserFail);
 
 
     }
