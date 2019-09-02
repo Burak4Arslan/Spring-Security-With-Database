@@ -32,7 +32,7 @@
 </p>
 
     <div th:if="${param.logout}">
-        <div class="alert alert-info">
+        <div id="logoutAlertDiv">
             You have been logged out.
         </div>
     </div>
@@ -66,7 +66,7 @@
         var saveUserRequest = new XMLHttpRequest();
         saveUserRequest.onreadystatechange = () => {
             if (saveUserRequest.readyState == 4 && saveUserRequest.status == 200){
-                console.log(saveUserRequest.response);
+                // console.log(saveUserRequest.response);
                 if(saveUserRequest.response === '') {
                     document.getElementById("signinFailDiv").style.display = "initial";
                     document.getElementById("signinSuccessDiv").style.display = "none";

@@ -12,9 +12,9 @@ public class Users {
     @Column(name = "user_id")
     private Long id;
 
-    @Column(name = "username" ,unique = true)
+    @Column(name="username" ,unique=true)
     private String username;
-    @Column(name = "password")
+    @Column(name="password")
     private String password;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)

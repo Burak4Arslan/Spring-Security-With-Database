@@ -1,0 +1,54 @@
+
+#usernameSpan {
+    color: cornflowerblue;
+    font-size: 20px;
+}
+
+#homepageHeader {
+    font-size: 50px;
+    color: cadetblue;
+}
+
+a {
+    text-decoration: none;
+    color: mediumblue;
+    font-size: 30px;
+}
+
+.wrapper {
+    width: 400px;
+    height: 600px;
+    margin: 0 auto;
+}
+
+#signinSuccessDiv {
+
+    padding: 10px;
+    background-color: lightgreen;
+    width: 200px;
+    text-align: center;
+    display: none;
+}
+
+#signinFailDiv {
+    padding: 10px;
+    background-color: indianred;
+    width: 200px;
+    text-align: center;
+    display: none;
+}
+
+#emptyValues {
+    padding: 10px;
+    background-color: palegoldenrod;
+    width: 200px;
+    text-align: center;
+    display: none;
+}
+
+#logoutAlertDiv {
+    padding: 10px;
+    background-color: lightyellow;
+    width: 200px;
+    text-align: center;
+}

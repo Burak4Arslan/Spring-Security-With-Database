@@ -25,20 +25,15 @@ public class MyRestController {
 
     @PostMapping("/users")
     public Users saveUser(@RequestBody Users user) {
-        System.out.println("1");
+
         List<Users> myUsers = userService.findAll();
 
         for(Users a : myUsers) {
-
             if(a.getUsername().equals(user.getUsername())) {
-                System.out.println("laaaaaaaaan");
                 return null;
             }
-
         }
-
         return userService.save(user);
-
     }
 
 }
