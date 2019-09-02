@@ -20,6 +20,10 @@
     <a href="/secured">See All Users</a>
 
     <p>
+
+        <div id="signinSuccessDiv">Signed in Successfully</div>
+        <div id="signinFailDiv">Signed in Failed! Please Try Again</div>
+        <div id="emptyValues">Username or Password Cannot Be Empty</div>
         <div th:unless="${#httpServletRequest.remoteUser}">
             <p><input type="text" placeholder="Username" id="username"></p>
             <p><input type="password" placeholder="Password" id="password"></p>
@@ -44,6 +48,16 @@
         let username = document.getElementById("username").value;
         let password = document.getElementById("password").value;
 
+        username = username.trim();
+        password = password.trim();
+
+        if(username == '' || password == '') {
+            document.getElementById("emptyValues").style.display = "initial";
+            document.getElementById("signinSuccessDiv").style.display = "none";
+            document.getElementById("signinFailDiv").style.display = "none";
+            return;
+        }
+
         let user = {
             "username" : username,
             "password" : password
@@ -51,9 +65,18 @@
 
         var saveUserRequest = new XMLHttpRequest();
         saveUserRequest.onreadystatechange = () => {
-            // console.log(saveUserRequest.response);
             if (saveUserRequest.readyState == 4 && saveUserRequest.status == 200){
                 console.log(saveUserRequest.response);
+                if(saveUserRequest.response === '') {
+                    document.getElementById("signinFailDiv").style.display = "initial";
+                    document.getElementById("signinSuccessDiv").style.display = "none";
+                    document.getElementById("emptyValues").style.display = "none";
+                } else {
+                    document.getElementById("signinSuccessDiv").style.display = "initial";
+                    document.getElementById("signinFailDiv").style.display = "none";
+                    document.getElementById("emptyValues").style.display = "none";
+                }
+                document.getElementById("password").value = '';
             }
         }
         saveUserRequest.open("POST","http://localhost:8080/users", true);
