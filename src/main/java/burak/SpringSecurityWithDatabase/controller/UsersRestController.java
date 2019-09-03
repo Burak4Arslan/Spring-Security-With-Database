@@ -62,7 +62,7 @@ public class UsersRestController {
     }
 
     @PreAuthorize("hasAnyRole('ADMIN')")
-    @PostMapping("/deleteUser")
+    @DeleteMapping("/users")
     public String deleteUser(@RequestBody String username) {
         System.out.println(username);
         Users userToDelete = userService.findByUsername(username);
