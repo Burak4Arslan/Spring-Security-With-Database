@@ -25,7 +25,7 @@
     <p>
         <div th:unless="${#httpServletRequest.remoteUser}">
             <div id="signinMainDiv">
-                <p id="signinP">Sign in Form</p>
+                <p id="signinP" class="badge badge-pill badge-warning p-2 mt-4">Sign in Form</p>
                 <div id="signinSuccessDiv" class="alert alert-success">Signed in Successfully</div>
                 <div id="signinFailDiv" class="alert alert-danger">Signed in Failed! Please Try Again</div>
                 <div id="emptyValues" class="alert alert-light">Username or Password Cannot Be Empty</div>

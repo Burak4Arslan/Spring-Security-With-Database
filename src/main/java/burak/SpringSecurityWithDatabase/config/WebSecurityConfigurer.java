@@ -43,7 +43,6 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter{
                 .logoutSuccessUrl("/?logout")
                 .and()
                 .exceptionHandling().accessDeniedHandler(accessDeniedHandler);
-
     }
 
     @Override

@@ -42,7 +42,7 @@ function deleteUser(username) {
     let deleteUserRequest = new XMLHttpRequest();
     deleteUserRequest.onreadystatechange = () => {
         if (deleteUserRequest.readyState === 4 && deleteUserRequest.status === 200){
-
+            console.log(deleteUserRequest.request);
             if(deleteUserRequest.response==="OK") {
                 console.log("User Deleted");
                 getAllUsers();

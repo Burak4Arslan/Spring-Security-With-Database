@@ -5,6 +5,7 @@ import burak.SpringSecurityWithDatabase.entity.Users;
 import burak.SpringSecurityWithDatabase.service.RoleService;
 import burak.SpringSecurityWithDatabase.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
@@ -30,11 +31,13 @@ public class UsersRestController {
         this.userService = userService;
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @GetMapping("/users")
     public List<Users> getUsers() {
         return userService.findAll();
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @GetMapping("/user")
     public Users getUsers(@RequestParam String username) {
         return userService.findByUsername(username);
@@ -58,9 +61,10 @@ public class UsersRestController {
         return userService.save(user);
     }
 
+    @PreAuthorize("hasAnyRole('ADMIN')")
     @PostMapping("/deleteUser")
     public String deleteUser(@RequestBody String username) {
-
+        System.out.println(username);
         Users userToDelete = userService.findByUsername(username);
         if(userToDelete==null) {
             return "Username Not Found";
